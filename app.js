@@ -34,11 +34,13 @@ slider.oninput = function () {
 
 class Queen {
   constructor() {
+    //to keep track of the position of queen on the chessBoard
     this.position = Object.assign({}, pos);
     // this.Board = 0;
     this.uuid = [];
   }
 
+  // this start the NQueen process
   nQueen = async () => {
     Board = 0;
     this.position[`${Board}`] = {};
@@ -48,6 +50,7 @@ class Queen {
     numberbox.disabled = false;
   };
 
+  
   isValid = async (board, r, col, n) => {
     //Setting the current box color to orange
     const table = document.getElementById(`table-${this.uuid[board]}`);
@@ -55,6 +58,7 @@ class Queen {
     const currentColumn = currentRow.getElementsByTagName("td")[col];
     currentColumn.innerHTML = queen;
     // currentColumn.style.backgroundColor = "#FF9F1C";
+    
     await q.delay();
 
     // Checking the queen in the same column
@@ -106,6 +110,7 @@ class Queen {
     return true;
   };
 
+  //use to remove highlighing from the previous queen placement
   clearColor = async (board) => {
     for (let j = 0; j < n; ++j) {
       const table = document.getElementById(`table-${this.uuid[board]}`);
@@ -119,6 +124,7 @@ class Queen {
     }
   };
 
+  //pause the execution of code
   delay = async () => {
     await new Promise((done) => setTimeout(() => done(), speed));
   };
@@ -126,6 +132,7 @@ class Queen {
   solveQueen = async (board, r, n) => {
     if (r == n) {
       ++Board;
+      //retrieves the HTML table element corresponding to the next board
       let table = document.getElementById(`table-${this.uuid[Board]}`);
       for (let k = 0; k < n; ++k) {
         let row = table.firstChild.childNodes[k];
